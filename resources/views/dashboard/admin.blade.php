@@ -39,7 +39,7 @@
 						<div id="chart2"></div>
 					</div>
 					<div class="widget-data">
-						<div class="h4 mb-0">{{$barang}}</div>
+						<div class="h4 mb-0"></div>
 						<div class="weight-600 font-14">Barang</div>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 						<div id="chart3"></div>
 					</div>
 					<div class="widget-data">
-						<div class="h4 mb-0">{{$stok}}</div>
+						<div class="h4 mb-0"></div>
 						<div class="weight-600 font-14">Stok</div>
 					</div>
 				</div>
@@ -65,7 +65,7 @@
 						<div id="chart4"></div>
 					</div>
 					<div class="widget-data">
-						<div class="h4 mb-0">{{$akun}}</div>
+						<div class="h4 mb-0"></div>
 						<div class="weight-600 font-14">Akun</div>
 					</div>
 				</div>

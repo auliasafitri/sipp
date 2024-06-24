@@ -25,12 +25,12 @@ Route::get('/DetailTransaksi/{id}/detail', [DetailTransaksiController::class,'de
 Route::resource('/DetailTransaksi', DetailTransaksiController::class);
 Route::get('/Kategori/{id}/kategori', [KategoriController::class,'kategori'])->name('Kategori.kategori');
 Route::resource('/kategori', KategoriController::class);
-<<<<<<< HEAD
+//<<<<<<< HEAD
 Route::get('/DetailTransaksi/{id}/cetakStruk', [DetailTransaksiController::class, 'cetakStruk'])->name('cetak.struk');
 Route::get('/cetakRekap', [DetailTransaksiController::class, 'cetakRekap'])->name('cetakRekap');
 
 
-=======
+//=======
 
 //Barang
 Route::get('/barangs', [BarangController::class, 'index'])->name('barang.index');
@@ -45,6 +45,6 @@ Route::delete('/deleteBarang/{id_barang}', [BarangController::class, 'delete'])-
 
  
 // Route::get('/cetak-struk', 'DetailTransaksiController')->name('cetak.struk');
->>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
+//>>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
 
 Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');

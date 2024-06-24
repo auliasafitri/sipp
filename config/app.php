@@ -181,10 +181,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-<<<<<<< HEAD
-        Barryvdh\DomPDF\ServiceProvider::class,
-=======
->>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
+
+       // Barryvdh\DomPDF\ServiceProvider::class,
+
+
         // Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
@@ -213,14 +213,14 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-<<<<<<< HEAD
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+   // 'aliases' => Facade::defaultAliases()->merge([
 
-=======
->>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
+      //  'PDF' => Barryvdh\DomPDF\Facade::class,
+
+
+
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
-    ])->toArray(),
+ //   ])->toArray(),
 
 ];

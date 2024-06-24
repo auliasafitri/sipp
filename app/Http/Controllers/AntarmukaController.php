@@ -25,22 +25,13 @@ class AntarmukaController extends Controller
         //dashboard view admin
         
         $data['title'] = 'Dashboard';
-        $kategori = DB::table('kategori')
+        $kategori = DB::table('kategoris')
             // ->where('jenis_kelola', '=', 'Masuk',)
             ->count();
 
-        $barang = DB::table('barang')
-            // ->where('jenis_kelola', '=', 'Rusak',)
-            ->count();
+        
 
-        $stok = DB::table('stok')
-            ->count();
-
-        $akun = DB::table('akun')
-            // ->where('baca', '=', '0',)
-            ->count();
-
-        return view('dashboard.admin',compact('kategori','barang','stok','akun'), $data);
+        return view('dashboard.admin',compact('kategori',), $data);
     }
 
     public function stafDashboard()
