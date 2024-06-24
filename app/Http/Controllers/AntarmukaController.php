@@ -25,13 +25,10 @@ class AntarmukaController extends Controller
         //dashboard view admin
         
         $data['title'] = 'Dashboard';
-        $kategori = DB::table('kategoris')
-            // ->where('jenis_kelola', '=', 'Masuk',)
-            ->count();
+        $data['kategori'] = DB::table('kategoris')->count();
+        $data['barang'] = DB::table('barangs')->count(); // Ambil semua data barang
 
-        
-
-        return view('dashboard.admin',compact('kategori',), $data);
+        return view('dashboard.admin', $data);
     }
 
     public function stafDashboard()
@@ -55,12 +52,10 @@ class AntarmukaController extends Controller
         return view('pegawai.view_pegawai', compact('data'), ["title" => "Data Pegawai"]);
     }
 
-    public function stokBarang()
-    {
-        //
-        $data = Barang::all();
-        return view('barang.semua_barang', compact('data'), ["title" => "Data Pegawai"]);
-    }
+    // public function stokBarang()
+    // {
+    //   
+    // }
 
     public function destroy($id)
     {

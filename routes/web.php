@@ -33,7 +33,8 @@ Route::get('/cetakRekap', [DetailTransaksiController::class, 'cetakRekap'])->nam
 //=======
 
 //Barang
-Route::get('/barangs', [BarangController::class, 'index'])->name('barang.index');
+
+Route::resource('/barang', BarangController::class);
 
 Route::get('/createBarang', [BarangController::class, 'create'])->name('barang.create');
 Route::post('/storeBarang', [BarangController::class, 'store'])->name('barang.store');

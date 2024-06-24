@@ -46,8 +46,12 @@
                     <form action="{{ route('kategori.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="nama_kategori">Kategori</label>
-                            <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" required>
+                            <label for="exampleInputEmail1">Kategori</label>
+                            <input type="text" class="form-control" name="nama_kategori" id="exampleInputnama_barang1"
+                                placeholder="Masukkan Nama Kategori">
+                            @error('nama_kategori')
+                            <small color="red"> {{ $message }} </small>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="/kategori" class="btn btn-secondary">Batal</a>

@@ -39,7 +39,7 @@
 						<div id="chart2"></div>
 					</div>
 					<div class="widget-data">
-						<div class="h4 mb-0"></div>
+						<div class="h4 mb-0">{{$barang}}</div>
 						<div class="weight-600 font-14">Barang</div>
 					</div>
 				</div>

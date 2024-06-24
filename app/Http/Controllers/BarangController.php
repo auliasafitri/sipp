@@ -14,13 +14,15 @@ class BarangController extends Controller
     public function index(){
 
         $data = Barang::with('kategori')->get();
-        return view('Barang/barangs', compact('data'));
+        return view('barang.barangs', compact('data'),["title" => "Barang"] );
+
     }
 
     public function create(){
 
         $kategoris = Kategori::all();
-        return view('Barang/createBarang', compact('kategoris'));
+        return view('Barang.createBarang', compact('kategoris'), ["title" => "Barang"] );
+      
     }
 
     public function store(Request $request)

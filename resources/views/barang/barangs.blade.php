@@ -45,7 +45,7 @@
 			<!-- Simple Datatable start -->
 			<div class="card-box mb-30">
 				<div class="pd-20">
-					<a href="" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus">TAMBAH KATEGORI</i></a>
+					<a href="{{ route('barang.create') }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus">TAMBAH BARANG</i></a>
 					{{-- <h4 class="text-blue h4">Kategori</h4> --}}
 					
 				</div>
@@ -74,18 +74,18 @@
 									<td  class="table-plus"><img width="100" src="{{ asset('storage/foto-barang/'.$d->foto) }}" alt=""></td>
 									<td>
                                     
-                                    <a href=""
+                                    <a href="{{ route ('barang.edit',['id_barang'=> $d->id_barang]) }}"
                                     <button class="btn btn-warning text-white"><i class="bi bi-pencil"></i>Edit</button>
                                     </a>
 
-                                    <a href=""
-													onclick="event.preventDefault(); confirmDelete('{{ $dp->id_kategori }}');">
+                                    <a href="{{ route('barang.delete',['id_barang'=> $d->id_barang]) }}"
+													onclick="event.preventDefault(); confirmDelete('{{ $d->id_barang }}');">
                                                     <button class="btn btn-danger text-white"><i class="bi bi-trash"></i>Hapus</button>
 									</a>												
 												{{-- Delete Button --}}
 												
 												 
-												 <form id="delete-form-{{ $d->id_barang }}" action="{{ route('kategori.destroy', $dp->id_kategori) }}" method="POST" style="display: none;">
+												 <form id="delete-form-{{ $d->id_barang }}" action="{{ route('barang.delete',['id_barang'=> $d->id_barang]) }}" method="POST" style="display: none;">
 													 @csrf
 													 @method('DELETE')
 												 </form>
