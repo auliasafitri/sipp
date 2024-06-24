@@ -90,15 +90,17 @@
 		<div class="sidebar-menu">
 			<ul id="accordion-menu">
 				<li class="nav-link active" data-toggle="active">
-					<a href="/" class="dropdown-toggle no-arrow">
+					<a href="/beranda" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
 					</a>
 				</li>
+				@if(session("level")=="admin")
 
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle">
 						<span class="micon bi bi-clipboard"></span><span class="mtext">Master Data</span>
 					</a>
+
 					<ul class="submenu">
 
 						<li class="">
@@ -108,16 +110,23 @@
 							<a href="/barang">Barang</a>
 						</li>
 					</ul>
+					@endif
+					@if(session("level")=="admin")
 				<li class="">
 					<a href="/akun" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-people"></span><span class="mtext">Akun</span>
 					</a>
 				</li>
+				@endif
+				@if(session("level")=="admin")
 				<li class="">
 					<a href="/stok" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-boxes"></span><span class="mtext">Stok</span>
 					</a>
 				</li>
+				@endif
+				
+
 				<li class="">
 					<a href="/transaksi" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-cart"></span><span class="mtext">Transaksi</span>

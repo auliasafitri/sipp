@@ -112,9 +112,9 @@
 					<span class="user-icon">
 						<img src="{{ asset('vendors/images/ikon_org.png') }}" alt="" />
 					</span>
-					@auth
+
 					<span class="user-name">{{ session('username') }}</span>
-					@endauth
+
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 					<a href="/logout"><i class="dw dw-logout"></i> Log Out</a>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\AntarmukaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\TransaksiController;
 use App\Models\stok;
@@ -24,7 +25,7 @@ use Illuminate\Http\Request;
 Route::get('/test', function () {
     return view('welcome');
 });
-Route::get('/', [AntarmukaController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::get('/beranda', [AntarmukaController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/DetailTransaksi/{id}/detail', [DetailTransaksiController::class, 'detail'])->name('DetailTransaksi.detail');
 Route::resource('/DetailTransaksi', DetailTransaksiController::class);
 Route::get('/Kategori/{id}/kategori', [KategoriController::class, 'kategori'])->name('Kategori.kategori');
@@ -69,11 +70,11 @@ Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // fiani
-Route::get('/login', [AntarmukaController::class, 'login'])->name('login');
-Route::post('/login', [AntarmukaController::class, 'postlogin']);
+Route::get('/', [AntarmukaController::class, 'login'])->name('login');
+Route::post('/', [AntarmukaController::class, 'postlogin']);
 Route::get('/logout', function () {
     session()->flush();
-    return redirect("/login");
+    return redirect("/");
 });
 Route::get('/stok', function () {
     return view('stok', ["title" => "stok", "stok" => stok::join("barangs", "stok.id_barang", "=", "barangs.id_barang")->join("kategoris", "barangs.id_kategori", "=", "kategoris.id_kategori")->get()]);

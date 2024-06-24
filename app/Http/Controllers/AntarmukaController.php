@@ -26,17 +26,18 @@ class AntarmukaController extends Controller
 
 
         // Retrieve the user by username
-        $user = Usergi::where('username', $request->username)->where('password', $request->password)->first();
+        $user = User::where('username', $request->username)->where('password', $request->password)->first();
 
 
         // Check if user exists and the password is correct
         if ($user) {
             // Store user ID and level in session
             session(['id_user' => $user->id_akun]);
+            session(['username' => $user->username]);
             session(['level' => $user->level]);
 
             // Redirect to admin dashboard with a success message
-            return redirect('/')->with('berhasil', 'Berhasil Login');
+            return redirect('/beranda')->with('berhasil', 'Berhasil Login');
         }
 
         // Authentication failed, redirect back to login page with an error message
