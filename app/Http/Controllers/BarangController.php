@@ -21,12 +21,13 @@ class BarangController extends Controller
     public function create(){
 
         $kategoris = Kategori::all();
-        return view('Barang.createBarang', compact('kategoris'), ["title" => "Barang"] );
+        return view('barang/createBarang', compact('kategoris'), ["title" => "Barang"] );
       
     }
 
     public function store(Request $request)
     {
+        //dd($request->all());
         // Validate the request
         $validator = Validator::make($request->all(), [
             'nama_barang' => 'required',

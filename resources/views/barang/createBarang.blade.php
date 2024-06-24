@@ -43,7 +43,7 @@
 
             <div class="card-box mb-30">
                 <div class="pd-20">
-                    <form action="{{ route('barang.store') }}" method="POST">
+                    <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Barang</label>
