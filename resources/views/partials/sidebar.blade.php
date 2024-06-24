@@ -90,7 +90,7 @@
 		<div class="sidebar-menu">
 			<ul id="accordion-menu">
 				<li class="nav-link active" data-toggle="active">
-					<a href="/" class="dropdown-toggle no-arrow">
+					<a href="/beranda" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
 					</a>
 				</li>
