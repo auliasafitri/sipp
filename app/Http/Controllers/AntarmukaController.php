@@ -26,7 +26,7 @@ class AntarmukaController extends Controller
 
 
         // Retrieve the user by username
-        $user = Usergi::where('username', $request->username)->where('password', $request->password)->first();
+        $user = User::where('username', $request->username)->where('password', $request->password)->first();
 
 
         // Check if user exists and the password is correct

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\AntarmukaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Models\stok;
 use App\Models\User;
