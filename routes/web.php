@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\AntarmukaController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\TransaksiController;
 use App\Models\stok;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,6 +47,19 @@ Route::get('/editBarang/{id_barang}', [BarangController::class, 'edit'])->name('
 Route::put('/updateBarang/{id_barang}', [BarangController::class, 'update'])->name('barang.update');
 
 Route::delete('/deleteBarang/{id_barang}', [BarangController::class, 'delete'])->name('barang.delete');
+
+
+// Route Transaksi
+
+Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+
+Route::get('/createTransaksi', [TransaksiController::class, 'create'])->name('transaksi.create');
+Route::post('/storeTransaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+
+Route::delete('transaksi/{id}', [TransaksiController::class, 'delete'])->name('transaksi.delete');
+Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
+
+
 
 
 // Route::get('/cetak-struk', 'DetailTransaksiController')->name('cetak.struk');
