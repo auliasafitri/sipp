@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\DetailTransaksi;
+use App\Models\Barang;
+use App\Models\Transaksi;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -121,5 +125,20 @@ $transaksi = DB::table('detail_transaksi')
 }
 
 
+
+
+    // Fungsi latief, kalo di rasa cocok, pakai aja atau hapus aja, :3
+    public function latief(){
+
+        $data = Transaksi::orderByDesc('tanggal')->get();
+        return view('detail_transaksi.daftarTransaksi', compact('data'),["title" => "Transaksi"] );
+
+    }
+
+    public function show($id)
+    {
+        $transaksi = Transaksi::with('detailTransaksis.barang')->findOrFail($id);
+        return view('detail_transaksi.detailTransaksi', compact('transaksi'), ["title" => "Detail Transaksi"]);
+    }
 
 }

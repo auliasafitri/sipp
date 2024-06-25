@@ -58,7 +58,14 @@ Route::get('/createTransaksi', [TransaksiController::class, 'create'])->name('tr
 Route::post('/storeTransaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
 
 Route::delete('transaksi/{id}', [TransaksiController::class, 'delete'])->name('transaksi.delete');
-Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
+
+
+//Route Detail Transaksi L
+
+Route::get('/Detail_versi_latief', [DetailTransaksiController::class, 'latief'])->name('detail.latief');
+
+//detail
+Route::get('/transaksi/{id}', [DetailTransaksiController::class, 'show'])->name('latief.show');
 
 
 

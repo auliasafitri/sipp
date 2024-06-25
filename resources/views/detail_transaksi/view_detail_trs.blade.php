@@ -80,13 +80,8 @@
 								<td class="table-plus">{{ $no++ }}</td>
 									<td class="table-plus">{{ $dp->tanggal }}</td>
 									<td>
-<<<<<<< HEAD
 									<a href="{{ route('DetailTransaksi.detail', $dp->id_transaksi) }}"
                                     <button class="btn btn-success text-white"><i class="bi bi-eye"></i>Detail</button>
-=======
-									<a href="{{ route('DetailTransaksi.detail', $dp->tgl_transaksi) }}"
-                                    <button class="btn btn-success text-white"><i class="bi bi-eye"></i>View</button>
->>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
                                     </a>
                                     <a href="{{ route('DetailTransaksi.destroy', $dp->id_transaksi) }}"
 													

@@ -14,16 +14,16 @@ class TransaksiController extends Controller
 {
     public function index(){
 
-        $data = Transaksi::orderByDesc('tanggal')->get();
-        return view('transaksi.transaksi', compact('data'),["title" => "Transaksi"] );
-
-    }
-
-    public function create()
-    {
         $dataBarang = Barang::get();
-        return view('transaksi.createTransaksi', compact('dataBarang'), ["title" => "Transaksi"] );
+        return view('transaksi.transaksi', compact('dataBarang'), ["title" => "Tambah Transaksi"] );
+
     }
+
+    // public function create()
+    // {
+    //     $dataBarang = Barang::get();
+    //     return view('transaksi.createTransaksi', compact('dataBarang'), ["title" => "Transaksi"] );
+    // }
 
     public function store(Request $request)
     {
@@ -43,7 +43,7 @@ class TransaksiController extends Controller
         $hargaKembaliNumeric = preg_replace("/[^0-9]/", "", $request->harga_kembali);
 
 
-        // Simpan data ke tabel transaksis
+        // Simpan data ke tabel transaksi
         $transaksi = new Transaksi();
         $transaksi->total_barang = $request->total_barang;
         $transaksi->grand_total = $grandTotalNumeric;
@@ -80,9 +80,5 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
     }
 
-    public function show($id)
-    {
-        $transaksi = Transaksi::with('detailTransaksis.barang')->findOrFail($id);
-        return view('transaksi.detailTransaksi', compact('transaksi'), ["title" => "Detail Transaksi"]);
-    }
+
 }
