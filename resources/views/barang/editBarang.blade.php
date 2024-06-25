@@ -43,7 +43,7 @@
 
             <div class="card-box mb-30">
                 <div class="pd-20">
-                    <form action="{{ route('barang.update', ['id_barang'=> $data->id_barang]) }}"  method="POST">
+                    <form action="{{ route('barang.update', ['id_barang'=> $data->id_barang]) }}"  method="POST"  enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -74,13 +74,14 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Foto</label>
-                            <input type="text" class="form-control" name="foto" value= "{{$data->foto}}" id="exampleInputEmail1"
+                            <label for="exampleInputFile">Foto</label>
+                            <input type="file" class="form-control" name="foto" value= "{{$data->foto}}" id="exampleInputFile"
                                 placeholder="Enter foto">
                             @error('foto')
                             <small color="red"> {{ $message }} </small>
                             @enderror
                         </div>
+                      
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="/kategori" class="btn btn-secondary">Batal</a>
                     </form>
