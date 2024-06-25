@@ -165,7 +165,7 @@
                                             required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="hargaKembali">Harga Kembali:</label>
+                                        <label for="hargaKembali">Kembalian:</label>
                                         <input type="text" class="form-control" id="hargaKembali" name="harga_kembali"
                                             readonly>
                                     </div>

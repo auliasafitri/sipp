@@ -59,14 +59,15 @@ class BarangController extends Controller
         // Create the Barang record
         Barang::create($data);
     
-        return redirect()->route('barang.index');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
+        
     }
     
 
     public function edit(Request $request, $id_barang){
         $data = Barang::find($id_barang);
         $kategoris = Kategori::all(); // Ambil juga kategori
-        return view('Barang/editBarang', compact('data', 'kategoris'), ["title" => "Edit Kategori"]);
+        return view('Barang/editBarang', compact('data', 'kategoris'), ["title" => "Edit Barang"]);
      
         
     }
@@ -119,7 +120,7 @@ class BarangController extends Controller
         // Update the record
         $barang->update($data);
 
-        return redirect()->route('barang.index');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui');
     }
 
 
@@ -129,6 +130,7 @@ class BarangController extends Controller
         if ($data){
             $data->delete();
         }
-        return redirect()->route('barang.index');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus');
+        
     }
 }
