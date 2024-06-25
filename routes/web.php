@@ -66,6 +66,8 @@ Route::get('/Detail_versi_latief', [DetailTransaksiController::class, 'latief'])
 
 //detail
 Route::get('/transaksi/{id}', [DetailTransaksiController::class, 'show'])->name('latief.show');
+Route::get('/transaksi/{id}/cetak-pdf', [DetailTransaksiController::class, 'cetakPdf'])->name('cetak-pdf');
+
 
 
 

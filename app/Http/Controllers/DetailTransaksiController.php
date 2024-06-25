@@ -7,12 +7,17 @@ use App\Models\DetailTransaksi;
 use App\Models\Barang;
 use App\Models\Transaksi;
 use App\Models\kategori;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade as PDF;
+//use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+
+use PDF;
+
 
 class DetailTransaksiController extends Controller
 {
@@ -140,5 +145,15 @@ $transaksi = DB::table('detail_transaksi')
         $transaksi = Transaksi::with('detailTransaksis.barang')->findOrFail($id);
         return view('detail_transaksi.detailTransaksi', compact('transaksi'), ["title" => "Detail Transaksi"]);
     }
+
+    public function cetakPdf($id)
+    {
+        $transaksi = Transaksi::with('detailTransaksis.barang')->find($id);
+
+        $pdf = FacadePdf::loadView('pdf', compact('transaksi'));
+        return $pdf->stream('pdf');
+    }
+
+    // sampe sini punya ku
 
 }
