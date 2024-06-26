@@ -133,6 +133,7 @@ $transaksi = DB::table('detail_transaksi')
 
 
     // Fungsi latief, kalo di rasa cocok, pakai aja atau hapus aja, :3
+    
     public function latief(){
 
         $data = Transaksi::orderByDesc('tanggal')->get();
