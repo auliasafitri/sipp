@@ -59,7 +59,7 @@ class BarangController extends Controller
         // Create the Barang record
         Barang::create($data);
     
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil disimpan');
         
     }
     
