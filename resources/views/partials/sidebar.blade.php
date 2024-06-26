@@ -151,12 +151,12 @@
 						<span class="micon bi bi-card-checklist"></span><span class="mtext">Detail Transaksi</span>
 					</a>
 				</li>
-				<li class="">
+				{{-- <li class="">
 					<a href="{{ route('detail.latief') }}" class="dropdown-toggle no-arrow">
 						<span class="micon bi bi-trash"></span><span class="mtext">Detail Transaksi
 							(Latief)</span>
 					</a>
-				</li>
+				</li> --}}
 
 		</div>
 	</div>
