@@ -1,57 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekap Transaksi</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
         }
         th, td {
-            border: 1px solid black;
             padding: 8px;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: right;
+        }
+        .total th, .total td {
+            border-top: 2px solid black;
+        }
     </style>
 </head>
 <body>
-    <h2>Rekap Transaksi dari {{ $tanggal_dari }} sampai {{ $tanggal_sampai }}</h2>
+    <h2>Rekap Transaksi dari {{ \Carbon\Carbon::parse($tanggal_dari)->translatedFormat('d F Y') }} sampai {{ \Carbon\Carbon::parse($tanggal_sampai)->translatedFormat('d F Y') }}</h2>
     <table>
         <thead>
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Nama Barang</th>
-                <th>Harga</th>
                 <th>Jumlah Barang</th>
                 <th>Sub Total</th>
             </tr>
-            
         </thead>
         <tbody>
             @php
                 $no = 1;
-                $total=0;
+                $total = 0;
             @endphp
-            @foreach ($transaksi as $tr)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ date('d-m-Y', strtotime($tr->tanggal)) }}</td>
-                    <td>{{ $tr->nama_barang }}</td>
-                    <td>Rp{{ number_format($tr->harga, 0, ",", ".") }}</td>
-                    <td>{{ $tr->jumlah_barang }}</td>
-                    <td>Rp{{ number_format($subtotal=$tr->harga*$tr->jumlah_barang, 0, ",", ".") }}</td>
-                </tr>
-                @php
-                    $total+=$subtotal;
-                @endphp
+            @foreach ($data as $transaksi)
+                @foreach ($transaksi->detailTransaksis as $detail)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ \Carbon\Carbon::parse($transaksi->tanggal)->translatedFormat('d-m-Y') }}</td>
+                        <td>{{ $detail->barang->nama_barang ?? 'N/A' }}</td>
+                        <td>{{ $detail->jumlah_barang }}</td>
+                        <td>Rp{{ number_format($detail->sub_total, 0, ",", ".") }}</td>
+                    </tr>
+                    @php
+                        $total += $detail->sub_total;
+                    @endphp
+                @endforeach
             @endforeach
-            <tr>
-                <th colspan="5">Total :</th>
-                <th>Rp{{ number_format($total, 0, ",", ".") }}</th>
+            <tr class="total">
+                <th colspan="4">Total :</th>
+                <td>Rp{{ number_format($total, 0, ",", ".") }}</td>
             </tr>
         </tbody>
     </table>

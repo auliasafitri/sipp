@@ -57,7 +57,13 @@
                             <p><strong> Grand Total: Rp {{ number_format($transaksi->grand_total, 0, ',', '.')
                                     }}</strong></p>
                         </div>
-                        <a href="{{ route('cetak-pdf', $transaksi->id) }}" class="btn btn-primary">Cetak PDF</a>
+                        <div class="row">
+                            <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="{{ route('cetak-struk', $transaksi->id) }}" class="btn btn-primary">Cetak Struk</a>
+                                </div>
+                                </div>
                     </div>
                 </div>
             </div>

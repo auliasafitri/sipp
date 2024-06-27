@@ -85,9 +85,9 @@
 												 </form>
 												 
 												 <script>
-												 function confirmDelete(kodelokasi) {
+												 function confirmDelete(abc) {
 													 if (confirm('Yakin ingin menghapus data ini?')) {
-														 document.getElementById('delete-form-' + kodelokasi).submit();
+														 document.getElementById('delete-form-' + abc).submit();
 													 }
 												 }
 												 </script>
