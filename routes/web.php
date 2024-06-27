@@ -26,16 +26,10 @@ Route::get('/test', function () {
     return view('welcome');
 });
 Route::get('/beranda', [AntarmukaController::class, 'adminDashboard'])->name('admin.dashboard');
-Route::get('/DetailTransaksi/{id}/detail', [DetailTransaksiController::class, 'detail'])->name('DetailTransaksi.detail');
-Route::resource('/DetailTransaksi', DetailTransaksiController::class);
+
+//kategori
 Route::get('/Kategori/{id}/kategori', [KategoriController::class, 'kategori'])->name('Kategori.kategori');
 Route::resource('/kategori', KategoriController::class);
-//<<<<<<< HEAD
-Route::get('/DetailTransaksi/{id}/cetakStruk', [DetailTransaksiController::class, 'cetakStruk'])->name('cetak.struk');
-Route::get('/cetakRekap', [DetailTransaksiController::class, 'cetakRekap'])->name('cetakRekap');
-
-
-//=======
 
 //Barang
 
@@ -60,20 +54,16 @@ Route::post('/storeTransaksi', [TransaksiController::class, 'store'])->name('tra
 Route::delete('transaksi/{id}', [TransaksiController::class, 'delete'])->name('transaksi.delete');
 
 
-//Route Detail Transaksi L
-
-Route::get('/Detail_versi_latief', [DetailTransaksiController::class, 'latief'])->name('detail.latief');
-
-//detail
-Route::get('/transaksi/{id}', [DetailTransaksiController::class, 'show'])->name('latief.show');
-Route::get('/transaksi/{id}/cetak-pdf', [DetailTransaksiController::class, 'cetakPdf'])->name('cetak-pdf');
-
+//detail transaksi
+Route::get('/transaksi/{id}', [DetailTransaksiController::class, 'detail'])->name('index.detail');
+Route::get('/transaksi/{id}/cetak-pdf', [DetailTransaksiController::class, 'cetakStruk'])->name('cetak-struk');
+Route::get('/cetakRekap', [DetailTransaksiController::class, 'cetakRekap'])->name('cetakRekap');
+Route::resource('detail-transaksi', DetailTransaksiController::class);
+Route::resource('/DetailTransaksi', DetailTransaksiController::class);
 
 
 
 
-// Route::get('/cetak-struk', 'DetailTransaksiController')->name('cetak.struk');
-//>>>>>>> db1fe6442a7e91227d800083835a799d9b73ae9c
 
 Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 

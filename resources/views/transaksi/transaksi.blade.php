@@ -34,7 +34,7 @@
                             <li class="breadcrumb-item">
                                 <a href="/transaksi">Transaksi</a>
                             </li>
-                           
+
                         </ol>
                     </nav>
                 </div>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="tanggal">Tanggal Transaksi :</label>
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                                        <input type="date" class="form-control" id="tanggal" name="tanggal" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -188,8 +188,10 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    
 
     <script>
         var totalItems = 0;
@@ -360,5 +362,16 @@ document.getElementById('grandTotalModal').value = grandTotal.toLocaleString('id
 }
 
 
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var today = new Date();
+        var day = String(today.getDate()).padStart(2, '0');
+        var month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+        var year = today.getFullYear();
+        var todayDate = year + '-' + month + '-' + day;
+        document.getElementById('tanggal').value = todayDate;
+    });
     </script>
     @endsection
