@@ -72,7 +72,7 @@
                             <th class="table-plus datatable-nosort">TANGGAL</th>
                             <th class="table-plus datatable-nosort">TOTAL BARANG</th>
                             <th class="table-plus datatable-nosort">TOTAL HARGA</th>
-                            @if(session("level")=="admin")
+                            @if(session("level")!="kepsek")
                             <th class="datatable-nosort">AKSI</th>
                             @endif
                         </tr>
@@ -84,7 +84,7 @@
                             <td>{{ \Carbon\Carbon::parse($transaksi->tanggal)->translatedFormat('l, j F Y') }}</td>
                             <td>{{ $transaksi->total_barang }}</td>
                             <td>Rp {{ number_format($transaksi->grand_total, 0, ',', '.') }}</td>
-                            @if(session("level")=="admin")
+                            @if(session("level")!="kepsek")
                             <td>
                             <a href="{{ route('index.detail', $transaksi->id) }}"
                             class="btn btn-info text-white""><i class="bi bi-eye"></i>Detail</a>
