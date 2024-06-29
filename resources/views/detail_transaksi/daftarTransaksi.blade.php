@@ -88,7 +88,7 @@
                             <td>
                             <a href="{{ route('index.detail', $transaksi->id) }}"
                             class="btn btn-info text-white""><i class="bi bi-eye"></i>Detail</a>
-                                        <form action="{{ route('detail-transaksi.destroy', $transaksi->id) }}" method="POST" style="display: inline-block;">
+                                        <form action="{{ route('DetailTransaksi.destroy', $transaksi->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger text-white" onclick="return confirm('Apakah Anda yakin ingin menghapus transaksi ini?')"><i class="bi bi-trash"></i>Hapus</button>

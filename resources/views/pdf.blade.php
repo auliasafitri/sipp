@@ -45,7 +45,7 @@
     <div class="container">
         <div class="header">
             <h2>Struk Transaksi</h2>
-            <p>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y H:i') }}</p>
+            <p>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
         </div>
         <div class="table-container">
             <table>

@@ -58,7 +58,6 @@ Route::delete('transaksi/{id}', [TransaksiController::class, 'delete'])->name('t
 Route::get('/transaksi/{id}', [DetailTransaksiController::class, 'detail'])->name('index.detail');
 Route::get('/transaksi/{id}/cetak-pdf', [DetailTransaksiController::class, 'cetakStruk'])->name('cetak-struk');
 Route::get('/cetakRekap', [DetailTransaksiController::class, 'cetakRekap'])->name('cetakRekap');
-Route::resource('detail-transaksi', DetailTransaksiController::class);
 Route::resource('/DetailTransaksi', DetailTransaksiController::class);
 
 

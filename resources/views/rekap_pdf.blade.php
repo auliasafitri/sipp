@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-    <h2>Rekap Transaksi dari {{ \Carbon\Carbon::parse($tanggal_dari)->translatedFormat('d F Y') }} sampai {{ \Carbon\Carbon::parse($tanggal_sampai)->translatedFormat('d F Y') }}</h2>
+    <h2>Laporan Rekap Transaksi Koperasi SDN Sarang Halang</h2>
     <table>
         <thead>
             <tr>
