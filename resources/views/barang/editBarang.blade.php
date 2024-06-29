@@ -74,7 +74,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputFile">Foto</label>
+                            <label for="exampleInputFile">Gambar</label>
                             <input type="file" class="form-control" name="foto" value= "{{$data->foto}}" id="exampleInputFile"
                                 placeholder="Enter foto">
                             @error('foto')

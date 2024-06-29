@@ -109,9 +109,9 @@ class BarangController extends Controller
             Storage::disk('public')->put($path, file_get_contents($image));
 
             // Optionally, delete the old file
-            if ($barang->foto) {
-                Storage::disk('public')->delete("foto-barang/" . $barang->foto);
-            }
+            // if ($barang->foto) {
+            //     Storage::disk('public')->delete("foto-barang/" . $barang->foto);
+            // }
 
             // Update the foto path in the data array
             $data['foto'] = $filename;
@@ -119,6 +119,7 @@ class BarangController extends Controller
 
         // Update the record
         $barang->update($data);
+        
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui');
     }

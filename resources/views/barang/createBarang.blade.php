@@ -75,7 +75,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
+                            <label for="exampleInputFile">Gambar</label>
                             <input type="file" class="form-control" name="foto" id="exampleInputFile">
                             @error('foto')
                             <small color="red"> {{ $message }} </small>
