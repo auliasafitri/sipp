@@ -30,7 +30,7 @@
 	<div class="row">
 
 		<div class="col-xl-3 mb-30">
-			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#578B8D;">
+			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#90CAF9;">
 				<div class="d-flex flex-wrap align-items-center">
 
 					<div class="row">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<div class="col-xl-3 mb-30">
-			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:aquamarine;">
+			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#A5D6A7;">
 				<div class="d-flex flex-wrap align-items-center">
 
 					<div class="row">
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 		<div class="col-xl-3 mb-30">
-			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:aqua;">
+			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#FFCCBC;">
 				<div class="d-flex flex-wrap align-items-center">
 
 					<div class="row">
@@ -84,7 +84,7 @@
 			</div>
 		</div>
 		<div class="col-xl-3 mb-30">
-			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#46668D;">
+			<div class="card-box pt-4 pb-4 height-100-p widget-style1" style="background-color:#EF9A9A;">
 				<div class="d-flex flex-wrap align-items-center">
 
 					<div class="row">

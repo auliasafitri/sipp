@@ -7,6 +7,7 @@ use App\Http\Controllers\AntarmukaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\Barang;
 use App\Models\stok;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -75,15 +76,26 @@ Route::get('/logout', function () {
     return redirect("/");
 });
 Route::get('/stok', function () {
-    return view('stok', ["title" => "stok", "stok" => stok::join("barangs", "stok.id_barang", "=", "barangs.id_barang")->join("kategoris", "barangs.id_kategori", "=", "kategoris.id_kategori")->get()]);
+    return view('stok', ["barang" => Barang::all(), "title" => "stok", "stok" => stok::join("barangs", "stok.id_barang", "=", "barangs.id_barang")->join("kategoris", "barangs.id_kategori", "=", "kategoris.id_kategori")->get()]);
 });
 Route::post('/stok', function (Request $request) {
     // memasukkan ke tabel user
     $stok = stok::create([
-        'id_barang' => "1",
+        'id_barang' => $request->id_barang,
         'stok_barang' => $request->stok_barang,
         'tanggal_stok' => $request->tanggal_stok,
     ]);
+    session()->flash("success", "data berhasil ditambah");
+    return redirect("/stok");
+});
+Route::post('/stok/ubah', function (Request $request) {
+    // memasukkan ke tabel user
+    $stok = Stok::find($request->id);
+$stok->stok_barang = $request->stok_barang;
+$stok->id_barang = $request->id_barang;
+$stok->tanggal_stok = $request->tanggal_stok;
+$stok->save();
+session()->flash("success", "data berhasil diubah");
     return redirect("/stok");
 });
 Route::get('/akun', function () {
@@ -96,15 +108,28 @@ Route::post('/akun', function (Request $request) {
         'password' => $request->password,
         'level' => $request->level,
     ]);
+    session()->flash("success", "data berhasil ditambah");
+    return redirect("/akun");
+});
+Route::post('/akun/ubah', function (Request $request) {
+    // memasukkan ke tabel user
+    $akun = User::find($request->id);
+$akun->username = $request->username;
+$akun->password = $request->password;
+$akun->level = $request->level;
+$akun->save();
+session()->flash("success", "data berhasil diubah");
     return redirect("/akun");
 });
 Route::post('/stok/hapus', function (Request $request) {
     $id = $request->id_stok;
     stok::find($id)->delete();
+    session()->flash("success", "data berhasil dihapus");
     return redirect()->back();
 });
 Route::post('/akun/hapus', function (Request $request) {
     $id = $request->id_akun;
     User::find($id)->delete();
+    session()->flash("success", "data berhasil dihapus");
     return redirect()->back();
 });

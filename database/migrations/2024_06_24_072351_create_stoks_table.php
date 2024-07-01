@@ -18,7 +18,12 @@ return new class extends Migration
             $table->string('stok_barang', 30);
             $table->date('tanggal_stok');
             $table->timestamps();
+            $table->foreign('id_barang')
+                  ->references('id_barang')
+                  ->on('barangs')
+                  ->onDelete('cascade'); // opsi onDelete jika diperlukan
         });
+        
     }
 
     /**

@@ -30,6 +30,11 @@ height: 100%;
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      @if(session('gagal'))
+        <div class="alert alert-danger">
+            {{ session('gagal') }}
+        </div>
+        @endif
         <form method="post">
             @csrf
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">

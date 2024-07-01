@@ -41,6 +41,7 @@ class AntarmukaController extends Controller
         }
 
         // Authentication failed, redirect back to login page with an error message
+        session()->flash("gagal", "username atau password salah");
         return redirect()->back()->withErrors(['username' => 'Username atau password salah.']);
     }
 

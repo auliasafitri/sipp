@@ -28,7 +28,10 @@
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <p>Home</p>
+                                <p>Dashboard</p>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Akun
                             </li>
                         </ol>
                     </nav>
@@ -81,10 +84,7 @@
                                             <option value="bendahara">Bendahara</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Data Sudah Benar</label>
-                                    </div>
+
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -112,11 +112,19 @@
                             <td class="table-plus">{{$data->level}}</td>
                             <td class="table-plus d-flex">
                                 <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Editmodal"><i class="bi bi-pencil"></i>Edit</button>
-                                <form action="/akun/hapus" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id_akun" value="{{$data->id_akun}}" />
-                                    <button class="btn btn-danger text-white" onclick="confirm('Apakah anda ingin menghapus data ini?')"><i class="bi bi-trash"></i>Hapus</button>
-                                </form>
+                                <form action="/akun/hapus" method="post" onsubmit="return confirmDelete()">
+    @csrf
+    <input type="hidden" name="id_akun" value="{{$data->id_akun}}" />
+    <button type="submit" class="btn btn-danger text-white">
+        <i class="bi bi-trash"></i>Hapus
+    </button>
+</form>
+
+<script>
+function confirmDelete() {
+    return confirm('Apakah anda ingin menghapus data ini?');
+}
+</script>
                             </td>
                         </tr>
                         @endforeach
@@ -128,27 +136,29 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-
+                                        <form action="/akun/ubah"  method="post">
+                                            @csrf
+                                        <input type="hidden" name="id" value="{{$data->id_akun}}">
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Username</label>
-                                                <input name="username" type="text" class="form-control" placeholder="Masukkan username " id="exampleInputPassword1">
+                                                <input value="{{$data->username}}" name="username" type="text" class="form-control" placeholder="Masukkan username " id="exampleInputPassword1">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                                <input name="password" type="text" class="form-control" placeholder="Masukkan pasword " id="exampleInputPassword1">
+                                                <input value="{{$data->password}}" name="password" type="text" class="form-control" placeholder="Masukkan pasword " id="exampleInputPassword1">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Akses</label>
                                                 <select name="level" class="form-select" aria-label="Default select example">
                                                     <option selected>Pilih Akses</option>
-                                                    <option value="admin">Admin</option>
-                                                    <option value="kepsek">Kepala Sekolah</option>
-                                                    <option value="bendahara">Bendahara</option>
+                                                    <option value="admin" {{$data->level == "admin" ? 'selected' : ''}}>Admin</option>
+                                                    <option value="kepsek" {{$data->level == "kepsek" ? 'selected' : ''}}>Kepala Sekolah</option>
+                                                    <option value="bendahara" {{$data->level == "bendahara" ? 'selected' : ''}}>Bendahara</option>
                                                 </select>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <a href="/user" class="btn btn-secondary">Batal</a>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             </div>
@@ -162,10 +172,7 @@
                         <div class="modal fade" id="Hapusmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content ">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Form Edit Akun</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
+                                    
                                     <div class="modal-body">
                                         <form>
                                             <p>Apakah Anda yakin untuk menghapus data ini</p>

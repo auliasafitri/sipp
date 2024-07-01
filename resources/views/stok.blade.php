@@ -28,9 +28,11 @@
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <p>Home</p>
+                                <p>Dashboard</p>
                             </li>
-
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Stok
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -62,14 +64,16 @@
                             </div>
                             <div class="modal-body">
                                 <form method="post">
-                                    @csrf 
+                                    @csrf
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Nama Barang</label>
                                         <select name="id_barang" class="form-select" aria-label="Default select example">
-  <option selected>Pilih Barang</option>
-  <option value="1">One</option>
-</select>
+                                            <option selected>Pilih Barang</option>
+                                            @foreach($barang as $data)
+                                            <option value="{{$data->id_barang}}">{{$data->nama_barang}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
@@ -109,15 +113,24 @@
                             <td class="table-plus">{{$data->nama_barang}}</td>
                             <td class="table-plus">{{$data->nama_kategori}}</td>
                             <td class="table-plus">Rp {{$data->harga}}</td>
-                            <td class="table-plus"> {{$data->stok_barang}}</td>
+                            <td class="table-plus"> {{$data->stok_barang}} <?php if ($data->stok_barang <=5) :?><i class="fa fa-warning text-danger"></i><?php endif?>
+                        </td>
                             <td class="table-plus">{{$data->tanggal_stok}}</td>
                             <td class="table-plus d-flex">
                                 <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Editmodal"><i class="bi bi-pencil"></i>Edit</button>
-                                <form action="/stok/hapus" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id_stok" value="{{$data->id_stok}}" />
-                                    <button class="btn btn-danger text-white" onclick="confirm('Apakah anda ingin menghapus data ini?')"><i class="bi bi-trash"></i>Hapus</button>
-                                </form>
+                                <form action="/stok/hapus" method="post" onsubmit="return confirmDelete()">
+    @csrf
+    <input type="hidden" name="id_stok" value="{{$data->id_stok}}" />
+    <button type="submit" class="btn btn-danger text-white">
+        <i class="bi bi-trash"></i>Hapus
+    </button>
+</form>
+
+<script>
+function confirmDelete() {
+    return confirm('Apakah anda ingin menghapus data ini?');
+}
+</script>
                             </td>
                         </tr>
                         @endforeach
@@ -129,27 +142,32 @@
                                         <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    <form method="post">
-                                    @csrf 
+                                        <form action="/stok/ubah"  method="post">
+                                            @csrf
 
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Nama Barang</label>
-                                        <select name="id_barang" class="form-select" aria-label="Default select example">
-  <option selected>Pilih Barang</option>
-  <option value="1">One</option>
-</select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
-                                        <input name="stok_barang" type="text" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label"></label>Tanggal
-                                        <input name="tanggal_stok" type="date" class="form-control" placeholder="Masukkan Tanggal " id="exampleInputPassword1">
-                                    </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Nama Barang</label>
+                                                <select name="id_barang" class="form-select" aria-label="Default select example">
+                                                    <option selected>Pilih Barang</option>
+                                                    @foreach($barang as $data2)
+                                            <option value="{{$data2->id_barang}}" {{$data->id_barang == $data2->id_barang ? 'selected' : ''}}>{{$data2->nama_barang}}</option>
+                                            @endforeach
+        
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
+                                                <input value="{{$data->stok_barang}}" name="stok_barang" type="text" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label"></label>Tanggal
+                                                <input value="{{$data->tanggal_stok}}" name="tanggal_stok" type="date" class="form-control" placeholder="Masukkan Tanggal " id="exampleInputPassword1">
+                                            </div>
+                                            <input type="hidden" name="id" value="{{$data->id_stok}}">
 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <a href="/stok" class="btn btn-secondary">Batal</a>
+                                        </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
