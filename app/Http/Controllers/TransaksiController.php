@@ -13,12 +13,26 @@ use App\Models\DetailTransaksi;
 
 class TransaksiController extends Controller
 {
-    public function index(){
-
-        $dataBarang = Barang::get();
-        return view('transaksi.transaksi', compact('dataBarang'), ["title" => "Tambah Transaksi"] );
-
+    public function index(Request $request) {
+        // Ambil semua kategori
+        $kategori = Kategori::all();
+    
+        // Ambil query pencarian dan kategori yang dipilih
+        $search = $request->get('search');
+        $selectedCategory = $request->get('kategori');
+    
+        // Ambil data barang dengan filter pencarian dan kategori
+        $dataBarang = Barang::when($search, function($query, $search) {
+                                return $query->where('nama_barang', 'like', "%{$search}%");
+                            })
+                            ->when($selectedCategory, function($query, $selectedCategory) {
+                                return $query->where('kategori_id', $selectedCategory);
+                            })
+                            ->get();
+    
+        return view('transaksi.transaksi', compact('dataBarang', 'kategori', 'selectedCategory'), ["title" => "Tambah Transaksi"]);
     }
+    
 
     // public function create()
     // {

@@ -88,6 +88,29 @@
                     <div class="card-header">
                         <h3 class="card-title">Daftar Barang</h3>
                         <div class="card-tools">
+                            <form id="search-form" method="GET" action="{{ route('transaksi.index') }}">
+                                <div class="row">
+                                    <div class="input-group input-group-sm" style="width: 300px;">
+                                        <input type="text" name="search" class="form-control float-right"
+                                            placeholder="Cari Barang" value="{{ request()->get('search') }}">
+                                        <div class="input-group-append">
+                                        </div>
+                                    </div>
+                                    {{-- <div class="input-group input-group-sm"
+                                        style="width: 300px; margin-top: 10px;">
+                                        <select name="kategori" class="form-control">
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach ($kategori as $k)
+                                            <option value="{{ $k->id }}" {{ request()->get('kategori') == $k->id ?
+                                                'selected' : '' }}>{{ $k->nama_kategori }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">Filter</button>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="card-body">
@@ -192,6 +215,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
 
+
+    <script>
+        // Function to handle live search
+        $(document).ready(function() {
+            $('#search-form input[name="search"]').on('keyup', function() {
+                clearTimeout($.data(this, 'timer'));
+                var wait = setTimeout(search, 500);
+                $(this).data('timer', wait);
+            });
+
+            function search() {
+                $('#search-form').submit();
+            }
+        });
+    </script>
 
     <script>
         var totalItems = 0;
