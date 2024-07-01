@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Kategori; 
 use App\Models\Transaksi; 
+use App\Models\stok; 
 use App\Models\DetailTransaksi;
 
 
@@ -63,6 +64,12 @@ class TransaksiController extends Controller
         $detailTransaksi->save();
         }
 
+        // Mengurangi stok barang
+        $stokBarang = Stok::where('id_barang', $barang['id'])->first();
+        if ($stokBarang) {
+            $stokBarang->stok_barang -= $barang['jumlah'];
+            $stokBarang->save();
+        }
 
         // Redirect ke halaman daftar_transaksi
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
