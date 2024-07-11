@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
-                                        <input name="stok_barang" type="text" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
+                                        <input min="0" name="stok_barang" type="number" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label"></label>Tanggal
@@ -117,7 +117,7 @@
                         </td>
                             <td class="table-plus">{{$data->tanggal_stok}}</td>
                             <td class="table-plus d-flex">
-                                <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Editmodal"><i class="bi bi-pencil"></i>Edit</button>
+                                <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Editmodal<?=$data->id_stok?>"><i class="bi bi-pencil"></i>Edit</button>
                                 <form action="/stok/hapus" method="post" onsubmit="return confirmDelete()">
     @csrf
     <input type="hidden" name="id_stok" value="{{$data->id_stok}}" />
@@ -133,8 +133,8 @@ function confirmDelete() {
 </script>
                             </td>
                         </tr>
-                        @endforeach
-                        <div class="modal fade" id="Editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        
+                        <div class="modal fade" id="Editmodal<?=$data->id_stok?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content ">
                                     <div class="modal-header">
@@ -147,7 +147,7 @@ function confirmDelete() {
 
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Nama Barang</label>
-                                                <select name="id_barang" class="form-select" aria-label="Default select example">
+                                                <select disabled name="id_barang" class="form-select" aria-label="Default select example">
                                                     <option selected>Pilih Barang</option>
                                                     @foreach($barang as $data2)
                                             <option value="{{$data2->id_barang}}" {{$data->id_barang == $data2->id_barang ? 'selected' : ''}}>{{$data2->nama_barang}}</option>
@@ -157,7 +157,7 @@ function confirmDelete() {
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
-                                                <input value="{{$data->stok_barang}}" name="stok_barang" type="text" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
+                                                <input min="0" value="{{$data->stok_barang}}" name="stok_barang" type="number" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label"></label>Tanggal
@@ -176,7 +176,7 @@ function confirmDelete() {
                                 </div>
                             </div>
                         </div>
-
+                        @endforeach
 
                     </tbody>
                 </table>

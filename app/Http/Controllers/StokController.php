@@ -26,7 +26,6 @@ class StokController extends Controller
     {
         $stok = Stok::find($request->id);
         $stok->stok_barang = $request->stok_barang;
-        $stok->id_barang = $request->id_barang;
         $stok->tanggal_stok = $request->tanggal_stok;
         $stok->save();
         session()->flash("success", "data berhasil diubah");
