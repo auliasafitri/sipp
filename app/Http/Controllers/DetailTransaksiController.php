@@ -26,7 +26,7 @@ class DetailTransaksiController extends Controller
      */
     public function index(){
 
-        $data = Transaksi::orderBy('tanggal')->get();
+        $data = Transaksi::orderByDesc('tanggal')->get();
         return view('detail_transaksi.daftarTransaksi', compact('data'),["title" => "Transaksi"] );
     }
 
