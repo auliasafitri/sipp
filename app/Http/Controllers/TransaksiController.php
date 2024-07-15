@@ -78,12 +78,13 @@ class TransaksiController extends Controller
         $detailTransaksi->save();
         }
 
-        // Mengurangi stok barang
-        $stokBarang = Stok::where('id_barang', $barang['id'])->first();
-        if ($stokBarang) {
-            $stokBarang->stok_barang -= $barang['jumlah'];
-            $stokBarang->save();
-        }
+      // Mengurangi stok barang
+      $stokBarang = Stok::where('id_barang', $barang['id'])->first();
+      if ($stokBarang) {
+          $stokBarang->stok_barang -= $barang['jumlah'];
+          $stokBarang->save();
+      }
+  
 
         // Redirect ke halaman daftar_transaksi
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
