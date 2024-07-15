@@ -72,8 +72,6 @@ class BarangController extends Controller
         
     }
 
-   
-
     public function update(Request $request, $id_barang)
     {
         // Find the existing record

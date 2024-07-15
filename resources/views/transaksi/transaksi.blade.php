@@ -96,19 +96,6 @@
                                         <div class="input-group-append">
                                         </div>
                                     </div>
-                                    {{-- <div class="input-group input-group-sm"
-                                        style="width: 300px; margin-top: 10px;">
-                                        <select name="kategori" class="form-control">
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach ($kategori as $k)
-                                            <option value="{{ $k->id }}" {{ request()->get('kategori') == $k->id ?
-                                                'selected' : '' }}>{{ $k->nama_kategori }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">Filter</button>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </form>
                         </div>

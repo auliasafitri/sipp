@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('stok', function (Blueprint $table) {
             $table->foreign('id_barang')
                   ->references('id_barang')->on('barang')
-                  ->onDelete('cascade'); // opsi onDelete bisa 'cascade', 'restrict', 'set null', dll
-        });
+                  ->onDelete('cascade'); // opsi onDelete bisa 'cascade', 'restrict', 'set null', dll
+        });
     }
 
     /**
@@ -23,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('stok', function (Blueprint $table) {
+            $table->dropForeign(['id_barang']);
+        });
     }
 };

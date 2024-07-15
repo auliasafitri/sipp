@@ -89,17 +89,17 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
     }
 
-    public function delete($id)
-    {
-        // Temukan transaksi berdasarkan ID
-        $transaksi = Transaksi::findOrFail($id);
+    // public function delete($id)
+    // {
+    //     // Temukan transaksi berdasarkan ID
+    //     $transaksi = Transaksi::findOrFail($id);
 
-        // Hapus transaksi
-        $transaksi->delete();
+    //     // Hapus transaksi
+    //     $transaksi->delete();
 
-        // Redirect ke halaman daftar transaksi atau halaman lain yang sesuai
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
-    }
+    //     // Redirect ke halaman daftar transaksi atau halaman lain yang sesuai
+    //     return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
+    // }
 
 
 }
