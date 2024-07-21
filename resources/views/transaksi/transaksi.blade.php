@@ -110,6 +110,11 @@
                                             alt="">
                                         <h5 class="card-title-centered mt-2">{{ $b->nama_barang }}</h5>
                                         <p class="card-text">Rp {{ number_format($b->harga, 0, ',', '.') }}</p>
+                                        <p class="card-text">Stok: {{ $b->stok->stok_barang ?? 'Tidak tersedia' }}</p> <!-- Menampilkan stok barang -->
+                                        @if($b->stok && $b->stok->stok_barang < 5 && $b->stok->stok_barang > 0)
+                                        <p class="text-danger">Stok hampir habis!</p>
+                                        @endif
+                    
                                         <button style="border-radius: 20px" type="button"
                                             class="btn btn-block btn-outline-success"
                                             onclick="addToCart({{ $b->id_barang }}, '{{ $b->nama_barang }}', {{ $b->harga }})">Add

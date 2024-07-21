@@ -23,12 +23,17 @@ class TransaksiController extends Controller
     
         // Ambil data barang dengan filter pencarian dan kategori
         $dataBarang = Barang::when($search, function($query, $search) {
-                                return $query->where('nama_barang', 'like', "%{$search}%");
-                            })
-                            ->when($selectedCategory, function($query, $selectedCategory) {
-                                return $query->where('kategori_id', $selectedCategory);
-                            })
-                            ->get();
+                return $query->where('nama_barang', 'like', "%{$search}%");
+            })
+            ->when($selectedCategory, function($query, $selectedCategory) {
+                return $query->where('kategori_id', $selectedCategory);
+            })
+            ->whereHas('stok', function($query) {
+                $query->where('stok_barang', '>', 0); // Filter barang dengan stok lebih dari 0
+            })
+            ->with('stok') // Eager load stok relation
+            ->get();
+
     
         return view('transaksi.transaksi', compact('dataBarang', 'kategori', 'selectedCategory'), ["title" => "Tambah Transaksi"]);
     }

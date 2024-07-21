@@ -54,6 +54,7 @@
 						<thead>
 							<tr>
 								<th class="table-plus datatable-nosort">NO</th>
+								<th class="table-plus datatable-nosort">KODE</th>
 								<th class="table-plus datatable-nosort">BARANG</th>
 								<th class="table-plus datatable-nosort">KATEGORI</th>
 								<th class="table-plus datatable-nosort">HARGA</th>
@@ -68,6 +69,7 @@
 							@foreach ($data as $d)
 								<tr>
 								<td class="table-plus">{{ $no++ }}</td>
+									<td class="table-plus">{{ $d->kd_barang }}</td>
 									<td class="table-plus">{{ $d->nama_barang }}</td>
 									<td class="table-plus">{{ $d->kategori->nama_kategori ?? 'Tidak ada kategori' }}</td>
 									<td class="table-plus">Rp {{ number_format($d->harga, 0, ',', '.') }}</td>

@@ -12,4 +12,9 @@ class stok extends Model
     protected $fillable = ["id_barang", "stok_barang", "tanggal_stok"];
     public $timestamps = false;
     use HasFactory;
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang'); // Sesuaikan 'id_barang' dengan foreign key yang tepat
+    }
 }

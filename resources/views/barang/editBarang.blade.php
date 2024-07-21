@@ -47,11 +47,19 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Kode Barang</label>
+                            <input type="text" class="form-control" name="kd_barang" value="{{$data->kd_barang}}" id="exampleInputnama_barang1"
+                                placeholder="Masukkan Kode Barang">
+                            @error('kd_barang')
+                            <small style="color: red;">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Nama Barang</label>
                             <input type="text" class="form-control" name="nama_barang" value="{{$data->nama_barang}}" id="exampleInputnama_barang1"
                                 placeholder="Masukkan Nama Barang">
                             @error('nama_barang')
-                            <small color="red"> {{ $message }} </small>
+                            <small style="color: red;">Nama Barang harus diisi.</small>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -62,7 +70,7 @@
                                 @endforeach
                             </select>
                             @error('id_kategori')
-                            <small style="color: red;"> {{ $message }} </small>
+                            <small style="color: red;">Kategori harus dipilih.</small>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -70,7 +78,7 @@
                             <input type="text" class="form-control" name="harga" value="{{$data->harga}}" id="exampleInputEmail1"
                                 placeholder="Enter harga">
                             @error('harga')
-                            <small color="red"> {{ $message }} </small>
+                            <small style="color: red;">Harga harus diisi.</small>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -78,7 +86,7 @@
                             <input type="file" class="form-control" name="foto" value= "{{$data->foto}}" id="exampleInputFile"
                                 placeholder="Enter foto">
                             @error('foto')
-                            <small color="red"> {{ $message }} </small>
+                            <small style="color: red;">Gambar harus diisi.</small>
                             @enderror
                         </div>
                       

@@ -11,6 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Hapus foreign key constraint jika sudah ada
+        Schema::table('stok', function (Blueprint $table) {
+            $table->dropForeign(['id_barang']); // Sesuaikan dengan nama kolom foreign key yang ingin dihapus jika berbeda
+        });
+
+        // Tambahkan foreign key constraint yang baru
         Schema::table('stok', function (Blueprint $table) {
             $table->foreign('id_barang')
                   ->references('id_barang')->on('barang')
@@ -23,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Hapus foreign key constraint yang baru ditambahkan
         Schema::table('stok', function (Blueprint $table) {
             $table->dropForeign(['id_barang']);
         });

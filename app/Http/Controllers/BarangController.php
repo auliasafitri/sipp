@@ -34,6 +34,9 @@ class BarangController extends Controller
             'id_kategori' => 'required|exists:kategoris,id_kategori',
             'harga' => 'required|numeric',
             'foto' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'kd_barang' => 'required|unique:barangs,kd_barang',
+        ], [
+            'kd_barang.unique' => 'Kode yang dimasukkan telah ada.', // Custom error message
         ]);
     
         if ($validator->fails()) {
@@ -54,6 +57,7 @@ class BarangController extends Controller
             'id_kategori' => $request->id_kategori,
             'harga' => $request->harga,
             'foto' => $filename,
+            'kd_barang' => $request->kd_barang,
         ];
     
         // Create the Barang record
@@ -83,7 +87,11 @@ class BarangController extends Controller
             'id_kategori' => 'required|exists:kategoris,id_kategori',
             'harga' => 'required|numeric',
             'foto' => 'sometimes|mimes:png,jpg,jpeg|max:2048', // 'sometimes' makes it optional
+            'kd_barang' => 'required|unique:barangs,kd_barang,' . $barang->id_barang . ',id_barang',
+        ], [
+            'kd_barang.unique' => 'Kode yang dimasukkan telah ada.', // Custom error message
         ]);
+    
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
@@ -94,6 +102,7 @@ class BarangController extends Controller
             'nama_barang' => $request->nama_barang,
             'id_kategori' => $request->id_kategori,
             'harga' => $request->harga,
+            'kd_barang' => $request->kd_barang,
         ];
 
         // Check if a new file is uploaded

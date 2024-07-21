@@ -17,6 +17,7 @@ class Barang extends Model
         'id_kategori',
         'harga',
         'foto',
+        'kd_barang',
         
     ];
 
@@ -25,5 +26,10 @@ class Barang extends Model
    {
        return $this->belongsTo(kategori::class, 'id_kategori', 'id_kategori');
    }
+
+   public function stok()
+    {
+        return $this->hasOne(Stok::class, 'id_barang', 'id_barang'); // Sesuaikan 'id_barang' dengan foreign key yang tepat
+    }
 
 }
