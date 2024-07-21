@@ -92,7 +92,11 @@ class TransaksiController extends Controller
         }
     
         // Redirect ke halaman daftar_transaksi
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
+        return redirect()->route('transaksi.index')->with([
+            'success' => 'Transaksi berhasil disimpan.',
+            'kd_transaksi' => $transaksi->kd_transaksi
+        ]);
+    
     }
     
 

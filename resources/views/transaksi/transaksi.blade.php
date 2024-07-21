@@ -8,6 +8,9 @@
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
+            @if (session('kd_transaksi'))
+            <br>Kode Transaksi: {{ session('kd_transaksi') }}
+            @endif
         </div>
         @endif
 
