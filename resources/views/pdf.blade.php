@@ -7,17 +7,40 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 400px;
-            margin: 0 auto;
+            margin: 30px auto;
             padding: 20px;
+            background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .header {
             text-align: center;
             margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        .header h2 {
+            margin: 0;
+        }
+        .header p {
+            margin: 5px 0 0;
+            color: #888;
+        }
+        .transaction-code {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
         }
         .table-container {
             width: 100%;
@@ -34,18 +57,36 @@
             padding: 10px;
             text-align: left;
         }
+        th {
+            background-color: #f0f0f0;
+        }
         .total {
             margin-top: 20px;
             font-weight: bold;
             text-align: right;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+        .footer hr {
+            border-top: 1px dashed #ccc;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h2>Struk Transaksi</h2>
+            <img src="vendors/images/logo_koperasi.png" alt="Logo">
+            <h2>Koperasi SDN Sarang Halang</h2>
             <p>{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
+        </div>
+        <div class="transaction-code">
+            <p><strong>Kode Transaksi: {{ $transaksi->kd_transaksi }}</strong></p>
         </div>
         <div class="table-container">
             <table>
@@ -70,11 +111,13 @@
             </table>
         </div>
         <div class="total">
-            <p><strong>Total Barang: {{ $transaksi->total_barang }}</strong></p>
-            <p><strong>Grand Total: Rp {{ number_format($transaksi->grand_total, 0, ',', '.') }}</strong></p>
+            <p>Total Barang: {{ $transaksi->total_barang }}</p>
+            <p>Grand Total: Rp {{ number_format($transaksi->grand_total, 0, ',', '.') }}</p>
         </div>
-        <hr style="border-top: 1px dashed #ccc;">
-        <p style="text-align: center;">Terima kasih atas kunjungan Anda</p>
+        <div class="footer">
+            <hr>
+            <p>Terima kasih atas kunjungan Anda</p>
+        </div>
     </div>
 </body>
 </html>
