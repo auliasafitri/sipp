@@ -47,57 +47,70 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
-        // Debugging input request
-        //dd($request->all());
-    
-        // Validasi data yang diterima dari form
-        $request->validate([
-            'total_barang' => 'required|integer|min:1',
-            'grand_total' => 'required|numeric|min:0',
-            'daftar_barang' => 'required|array|min:1',
-            'harga_bayar' => 'required|numeric|min:0',
-            'harga_kembali' => 'required|numeric|min:0',
-            'tanggal' => 'required|date',
-        ]);
-    
-        // Ubah format grand_total dan harga_kembali dari string ke numeric
-        $grandTotalNumeric = preg_replace("/[^0-9]/", "", $request->grand_total);
-        $hargaKembaliNumeric = preg_replace("/[^0-9]/", "", $request->harga_kembali);
-    
-        // Simpan data ke tabel transaksi
-        $transaksi = new Transaksi();
-        $transaksi->total_barang = $request->total_barang;
-        $transaksi->grand_total = $grandTotalNumeric;
-        $transaksi->tanggal = $request->tanggal;
-        $transaksi->harga_bayar = $request->harga_bayar;
-        $transaksi->harga_kembali = $hargaKembaliNumeric;
-        $transaksi->save();
-    
-        // Proses menyimpan detail_transaksi dan mengurangi stok barang
-        foreach ($request->daftar_barang as $barang) {
-            // Simpan detail transaksi
-            $detailTransaksi = new DetailTransaksi();
-            $detailTransaksi->id_transaksi = $transaksi->id; // Ambil id_transaksi dari transaksi yang baru dibuat
-            $detailTransaksi->barang_id = $barang['id'];
-            $detailTransaksi->jumlah_barang = $barang['jumlah'];
-            $detailTransaksi->sub_total = $barang['sub_total'];
-            $detailTransaksi->save();
-    
-            // Mengurangi stok barang
-            $stokBarang = Stok::where('id_barang', $barang['id'])->first();
-            if ($stokBarang) {
-                $stokBarang->stok_barang -= $barang['jumlah'];
-                $stokBarang->save();
-            }
+    // Validasi data yang diterima dari form
+    $request->validate([
+        'total_barang' => 'required|integer|min:1',
+        'grand_total' => 'required|numeric|min:0',
+        'daftar_barang' => 'required|array|min:1',
+        'harga_bayar' => 'required|numeric|min:0',
+        'harga_kembali' => 'required|numeric|min:0',
+        'tanggal' => 'required|date',
+    ]);
+
+    // Ubah format grand_total dan harga_kembali dari string ke numeric
+    $grandTotalNumeric = preg_replace("/[^0-9]/", "", $request->grand_total);
+    $hargaKembaliNumeric = preg_replace("/[^0-9]/", "", $request->harga_kembali);
+
+    // Periksa stok barang sebelum menyimpan transaksi
+    $barangStokTidakCukup = [];
+    foreach ($request->daftar_barang as $barang) {
+        $stokBarang = Stok::where('id_barang', $barang['id'])->first();
+        if (!$stokBarang || $stokBarang->stok_barang < $barang['jumlah']) {
+            $barangNama = Barang::where('id_barang', $barang['id'])->first()->nama_barang;
+            $barangStokTidakCukup[] = $barangNama;
         }
-    
-        // Redirect ke halaman daftar_transaksi
-        return redirect()->route('transaksi.index')->with([
-            'success' => 'Transaksi berhasil disimpan.',
-            'kd_transaksi' => $transaksi->kd_transaksi
-        ]);
-    
     }
+
+    if (!empty($barangStokTidakCukup)) {
+        $pesanError = 'Stok barang berikut tidak mencukupi: ' . implode(', ', $barangStokTidakCukup);
+        return redirect()->back()->with('error', $pesanError);
+    }
+
+    // Simpan data ke tabel transaksi
+    $transaksi = new Transaksi();
+    $transaksi->total_barang = $request->total_barang;
+    $transaksi->grand_total = $grandTotalNumeric;
+    $transaksi->tanggal = $request->tanggal;
+    $transaksi->harga_bayar = $request->harga_bayar;
+    $transaksi->harga_kembali = $hargaKembaliNumeric;
+    $transaksi->save();
+
+    // Proses menyimpan detail_transaksi dan mengurangi stok barang
+    foreach ($request->daftar_barang as $barang) {
+        // Simpan detail transaksi
+        $detailTransaksi = new DetailTransaksi();
+        $detailTransaksi->id_transaksi = $transaksi->id; // Ambil id_transaksi dari transaksi yang baru dibuat
+        $detailTransaksi->barang_id = $barang['id'];
+        $detailTransaksi->jumlah_barang = $barang['jumlah'];
+        $detailTransaksi->sub_total = $barang['sub_total'];
+        $detailTransaksi->save();
+
+        // Mengurangi stok barang
+        $stokBarang = Stok::where('id_barang', $barang['id'])->first();
+        if ($stokBarang) {
+            $stokBarang->stok_barang -= $barang['jumlah'];
+            $stokBarang->save();
+        }
+    }
+
+    // Redirect ke halaman daftar_transaksi
+    return redirect()->route('transaksi.index')->with([
+        'success' => 'Transaksi berhasil disimpan.',
+        'kd_transaksi' => $transaksi->kd_transaksi
+    ]);
+}
+
+
     
 
     // public function delete($id)
