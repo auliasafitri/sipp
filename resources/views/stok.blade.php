@@ -46,7 +46,7 @@
         <div class="card-box mb-30">
             <div class="pd-20">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-outline-primary btn-sm d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa fa-plus"></i> Tambah Stok
                 </button>
 
@@ -79,7 +79,7 @@
                                         <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
                                         <input min="0" name="stok_barang" type="number" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 d-none">
                                         <label for="exampleInputPassword1" class="form-label"></label>Tanggal
                                         <input name="tanggal_stok" type="date" class="form-control" placeholder="Masukkan Tanggal " id="exampleInputPassword1">
                                     </div>
@@ -102,7 +102,7 @@
                             <th class="table-plus datatable-nosort">Kategori Barang</th>
                             <th class="table-plus datatable-nosort">Harga Barang</th>
                             <th class="table-plus datatable-nosort">Stok Barang</th>
-                            <th class="table-plus datatable-nosort">Tanggal</th>
+                            
                             <th class="datatable-nosort">Aksi</th>
                         </tr>
                     </thead>
@@ -112,12 +112,12 @@
                             <td class="table-plus">{{$no+=1}}</td>
                             <td class="table-plus">{{$data->nama_barang}}</td>
                             <td class="table-plus">{{$data->nama_kategori}}</td>
-                            <td class="table-plus">Rp {{$data->harga}}</td>
+                            <td class="table-plus">Rp {{ number_format($data->harga, 0, ',', '.') }}</td>
                             <td class="table-plus"> {{$data->stok_barang}} <?php if ($data->stok_barang <=5) :?><i class="fa fa-warning text-danger"></i><?php endif?>
                         </td>
-                            <td class="table-plus">{{$data->tanggal_stok}}</td>
+                            
                             <td class="table-plus d-flex">
-                                <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Editmodal<?=$data->id_stok?>"><i class="bi bi-pencil"></i>Edit</button>
+                                <button class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#Editmodal<?=$data->id_stok?>"><i class="bi bi-plus"></i></button>
                                 <form action="/stok/hapus" method="post" onsubmit="return confirmDelete()">
     @csrf
     <input type="hidden" name="id_stok" value="{{$data->id_stok}}" />
@@ -138,7 +138,7 @@ function confirmDelete() {
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content ">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Form Edit Stok</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Form Tambah Stok</h5>
                                         <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -157,9 +157,9 @@ function confirmDelete() {
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label"></label>Jumlah stok Barang
-                                                <input min="0" value="{{$data->stok_barang}}" name="stok_barang" type="number" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
+                                                <input min="{{$data->stok_barang}}" value="{{$data->stok_barang}}" name="stok_barang" type="number" class="form-control" placeholder="Jumlah Barang " id="exampleInputPassword1">
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 d-none">
                                                 <label for="exampleInputPassword1" class="form-label"></label>Tanggal
                                                 <input value="{{$data->tanggal_stok}}" name="tanggal_stok" type="date" class="form-control" placeholder="Masukkan Tanggal " id="exampleInputPassword1">
                                             </div>

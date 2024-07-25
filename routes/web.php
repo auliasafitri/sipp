@@ -9,10 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\TransaksiController;
-use App\Models\Barang;
-use App\Models\stok;
-use App\Models\User;
-use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------

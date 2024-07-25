@@ -139,7 +139,8 @@ function confirmDelete() {
                                         <form action="/akun/ubah"  method="post">
                                             @csrf
                                         <input type="hidden" name="id" value="{{$data->id_akun}}">
-                                            <div class="mb-3">
+                                            <div class="mb-3 d-none">
+                        
                                                 <label for="exampleInputPassword1" class="form-label">Username</label>
                                                 <input value="{{$data->username}}" name="username" type="text" class="form-control" placeholder="Masukkan username " id="exampleInputPassword1">
                                             </div>
